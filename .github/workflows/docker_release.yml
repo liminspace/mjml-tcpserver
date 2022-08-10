@@ -1,0 +1,42 @@
+name: Docker release
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+"
+
+jobs:
+  build:
+    environment: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check ref name
+        run: |
+          if [[ ! "${{ github.ref_name }}" =~ ^v[0-9]+\.[0-9]+$ ]]; then
+            echo "Bad tag or branch name '${{ github.ref_name }}': it must be like 'v1.0'"
+            exit 1
+          fi
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_REGISTRY_USER }}
+          password: ${{ secrets.DOCKER_REGISTRY_KEY }}
+      - name: Define tags
+        id: tags
+        run: |
+          ver=$(echo "${{ github.ref_name }}" | perl -pe 's/^v(\d+)\.(\d+)$/\1.\2/')
+          base_ver=$(echo "${{ github.ref_name }}" | perl -pe 's/^v(\d+)\.(\d+)$/\1/')
+          tags="${{ secrets.IMAGE_NAME }}:$ver"
+          tags="$tags,${{ secrets.IMAGE_NAME }}:$base_ver"
+          tags="$tags,${{ secrets.IMAGE_NAME }}:latest"
+          echo "Defined tags: $tags"
+          echo "::set-output name=value::$tags"
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: "${{ steps.tags.outputs.value }}"
