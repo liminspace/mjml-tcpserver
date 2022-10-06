@@ -25,7 +25,7 @@ Build the image::
 You can specify build arguments::
 
   $ docker build -t mjml-tcpserver \
-    --build-arg MJML_VERSION=4.12.0 \
+    --build-arg MJML_VERSION=4.13.0 \
     --build-arg EXPOSE=28101 \
     --no-cache .
 
@@ -103,7 +103,7 @@ Example::
       build:
         context: .
         args:
-          - MJML_VERSION=4.12.0
+          - MJML_VERSION=4.13.0
           - EXPOSE=28103
       restart: always
       ports:
