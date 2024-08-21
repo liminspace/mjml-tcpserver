@@ -1,3 +1,9 @@
+.. image:: https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct-single.svg
+ :target: https://stand-with-ukraine.pp.ua
+ :alt: Stand With Ukraine
+
+|
+
 MJML TCP-Server
 ===============
 
