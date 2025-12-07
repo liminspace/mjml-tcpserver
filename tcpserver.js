@@ -42,7 +42,7 @@ for (var i = 0; i < argv.length; i++) {
         }
         if (arg === 'help') {
             if (mjml_maj_ver >= 4) {
-                // more options: https://github.com/mjmlio/mjml/blob/master/packages/mjml-core/src/index.js#L34
+                // more options: https://documentation.mjml.io/#inside-node-js
                 console.log('Run command: NODE_PATH=node_modules node tcpserver.js ' +
                             '--port=28101 --host=127.0.0.1 --touchstop=/tmp/mjmltcpserver.stop ' +
                             '--mjml.minify=false --mjml.validationLevel=soft');
