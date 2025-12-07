@@ -1,3 +1,10 @@
+1.3 (2025-12-08)
+==================
+  * Upgraded base node image to 22-trixie
+  * Upgraded MJML to 4.17.2
+  * Updated Dockerfile
+
+
 1.2 (2024-08-21)
 ==================
   * Upgraded base node image to 20-bookworm
