@@ -13,12 +13,22 @@ Mainly created for `django-mjml <https://github.com/liminspace/django-mjml>`_.
 
 |
 
+Requirements
+------------
+* Node v24
+* MJML v4 / v5
+
+
 Using directly
 --------------
 
 You can run the server just running the file with arguments like::
 
   $ node tcpserver.js --host=0.0.0.0 --port=28101 --mjml.minify=true --mjml.validationLevel=strict
+
+Use ``--maxconnections=1000`` to limit the number of simultaneously served connections
+(``1000`` by default). Connections above the limit are dropped immediately, which keeps
+the server from being exhausted by clients that open sockets and never send anything.
 
 
 Using Docker
@@ -31,7 +41,7 @@ Build the image::
 You can specify build arguments::
 
   $ docker build -t mjml-tcpserver \
-    --build-arg MJML_VERSION=4.17.2 \
+    --build-arg MJML_VERSION=4.18.0 \
     --build-arg EXPOSE=28101 \
     --no-cache .
 
@@ -114,3 +124,14 @@ Example::
       restart: always
       ports:
         - "28103:28103"
+
+
+Verbosity
+---------
+
+To get more std output, use ``--verbose=true``::
+
+  node tcpserver.js --host=0.0.0.0 --port=28101 --verbose=true
+
+  docker run -d --rm -p 28101:28101 mjml-tcpserver --verbose=true
+
