@@ -1,3 +1,13 @@
+1.4 (2026-08-25)
+==================
+  * Upgraded base node image to 24-trixie
+  * Upgraded MJML to 5.4.0
+  * Updated TCP server
+  * Removed supporting MJML older than 4
+  * Added `--maxconnections` and `--verbose` options
+  * Updated the server
+
+
 1.3 (2025-12-08)
 ==================
   * Upgraded base node image to 22-trixie
